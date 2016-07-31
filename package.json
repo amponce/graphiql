@@ -1,5 +1,5 @@
 {
-  "name": "graphiql",
+  "name": "graphiql-editor",
   "version": "0.7.3",
   "description": "An graphical interactive in-browser GraphQL IDE.",
   "contributors": [
