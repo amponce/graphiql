@@ -29,8 +29,8 @@
     "testonly": "babel-node ./node_modules/.bin/_mocha $npm_package_options_mocha",
     "lint": "eslint src",
     "check": "flow check",
-    "build": ". ./resources/build.sh",
-    "preinstall": "npm build",
+    "build": "sh resources/build.sh",
+    "postinstall": "npm build",
     "preversion": ". ./resources/checkgit.sh && npm test",
     "prepublish": ". ./resources/prepublish.sh"
   },
