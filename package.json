@@ -16,7 +16,7 @@
     "url": "https://github.com/antoinecellier/graphiql"
   },
   "license": "SEE LICENSE IN LICENSE",
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "browserify-shim": {
     "react": "global:React",
     "react-dom": "global:ReactDOM"
