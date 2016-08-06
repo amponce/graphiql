@@ -17,6 +17,14 @@
   },
   "license": "SEE LICENSE IN LICENSE",
   "main": "dist/index.js",
+  "files": [
+    "dist",
+    "graphiql.js",
+    "graphiql.min.js",
+    "graphiql.css",
+    "README.md",
+    "LICENSE"
+  ],
   "browserify-shim": {
     "react": "global:React",
     "react-dom": "global:ReactDOM"
@@ -29,8 +37,7 @@
     "testonly": "babel-node ./node_modules/.bin/_mocha $npm_package_options_mocha",
     "lint": "eslint src",
     "check": "flow check",
-    "build": "sh resources/build.sh",
-    "postinstall": "npm i && npm build",
+    "build": ". ./resources/build.sh",
     "preversion": ". ./resources/checkgit.sh && npm test",
     "prepublish": ". ./resources/prepublish.sh"
   },
