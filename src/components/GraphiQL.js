@@ -274,6 +274,7 @@ export class GraphiQL extends React.Component {
     const queryWrapStyle = {
       WebkitFlex: this.state.editorFlex,
       flex: this.state.editorFlex,
+      backgroundColor: 'red'
     };
 
     const docWrapStyle = {
@@ -286,12 +287,44 @@ export class GraphiQL extends React.Component {
       height: variableOpen ? this.state.variableEditorHeight : null
     };
 
-    const justEditor = this.props.justEditor;
+    if(this.props.justEditor) {
+      return (
+        <div id="graphiql-container">
+          <div className="editorWrap">
+            <div
+              ref={n => { this.editorBarComponent = n; }}
+              className="editorBar"
+              onMouseDown={this.handleResizeStart}>
+              <div className="queryWrap" style={queryWrapStyle}>
+                <QueryEditor
+                  ref={n => { this.queryEditorComponent = n; }}
+                  schema={this.state.schema}
+                  value={this.state.query}
+                  onEdit={this.handleEditQuery}
+                  onHintInformationRender={this.handleHintInformationRender}
+                />
+              </div>
+              <div className="resultWrap">
+                {this.state.isWaitingForResponse &&
+                  <div className="spinner-container">
+                    <div className="spinner" />
+                  </div>
+                }
+                <ResultViewer
+                  ref={c => { this.resultComponent = c; }}
+                  value={this.state.response}
+                />
+                {footer}
+              </div>
+            </div>
+          </div>
+      )
+    }
 
     return (
       <div id="graphiql-container">
         <div className="editorWrap">
-          { !justEditor && <div className="topBarWrap">
+          <div className="topBarWrap">
             <div className="topBar">
               {logo}
               <ExecuteButton
@@ -314,7 +347,7 @@ export class GraphiQL extends React.Component {
                 {'Docs'}
               </button>
             }
-          </div>}
+          </div>
           <div
             ref={n => { this.editorBarComponent = n; }}
             className="editorBar"
@@ -327,7 +360,7 @@ export class GraphiQL extends React.Component {
                 onEdit={this.handleEditQuery}
                 onHintInformationRender={this.handleHintInformationRender}
               />
-              { !justEditor && <div className="variable-editor" style={variableStyle}>
+              <div className="variable-editor" style={variableStyle}>
                 <div
                   className="variable-editor-title"
                   style={{ cursor: variableOpen ? 'row-resize' : 'n-resize' }}
@@ -341,9 +374,9 @@ export class GraphiQL extends React.Component {
                   onEdit={this.handleEditVariables}
                   onHintInformationRender={this.handleHintInformationRender}
                 />
-                </div>}
+              </div>
             </div>
-            { !justEditor && <div className="resultWrap">
+            <div className="resultWrap">
               {this.state.isWaitingForResponse &&
                 <div className="spinner-container">
                   <div className="spinner" />
@@ -354,10 +387,10 @@ export class GraphiQL extends React.Component {
                 value={this.state.response}
               />
               {footer}
-            </div>}
+            </div>
           </div>
         </div>
-        { !justEditor && <div className="docExplorerWrap" style={docWrapStyle}>
+        <div className="docExplorerWrap" style={docWrapStyle}>
           <div
             className="docExplorerResizer"
             onMouseDown={this.handleDocsResizeStart}
@@ -369,7 +402,7 @@ export class GraphiQL extends React.Component {
               {'\u2715'}
             </div>
           </DocExplorer>
-        </div>}
+        </div>
       </div>
     );
   }
