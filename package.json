@@ -30,7 +30,7 @@
     "lint": "eslint src",
     "check": "flow check",
     "build": "sh resources/build.sh",
-    "postinstall": "npm build",
+    "postinstall": "npm i && npm build",
     "preversion": ". ./resources/checkgit.sh && npm test",
     "prepublish": ". ./resources/prepublish.sh"
   },
